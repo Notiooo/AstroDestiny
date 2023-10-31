@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController _characterController;
+    private SpriteRenderer _spriteRenderer;
     private Vector2 _input;
     private Vector3 _inputMoveDirection;
     private float _currentRotationVelocity;
@@ -21,14 +22,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeedGround = 8;
     [SerializeField] private float movementForceSpace = 5;
 
+    [SerializeField] private Sprite runningSprite;
+    [SerializeField] private Sprite standingSprite;
+
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
     {
-        ApplyRotation();
+        updatePlayerSprites();
         CalculateForces();
 
         ApplyMovement();
@@ -39,13 +44,26 @@ public class PlayerController : MonoBehaviour
         _characterController.Move(_velocity * Time.deltaTime);
     }
 
-    private void ApplyRotation()
+    private void updatePlayerSprites()
     {
-        if (_input.sqrMagnitude == 0) return;
+ 
+        if (_input.sqrMagnitude == 0)
+        {
+            _spriteRenderer.sprite = standingSprite;
+        }
+        else
+        {
+            _spriteRenderer.sprite = runningSprite;
+        }
 
-        var targetAngle = Mathf.Atan2(_inputMoveDirection.x, _inputMoveDirection.z) * Mathf.Rad2Deg;
-        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _currentRotationVelocity, rotationSmoothTime);
-        transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
+        if (_inputMoveDirection.x < 0)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if (_inputMoveDirection.x > 0)
+        {
+            _spriteRenderer.flipX = false;
+        }
     }
 
     private void CalculateForces()
