@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Sprite runningSprite;
     [SerializeField] private Sprite standingSprite;
+    [SerializeField] private Sprite floatingInSpaceSprite;
 
     private void Awake()
     {
@@ -46,14 +47,20 @@ public class PlayerController : MonoBehaviour
 
     private void updatePlayerSprites()
     {
- 
-        if (_input.sqrMagnitude == 0)
+        if (_isInside)
         {
-            _spriteRenderer.sprite = standingSprite;
+            if (_input.sqrMagnitude == 0)
+            {
+                _spriteRenderer.sprite = standingSprite;
+            }
+            else
+            {
+                _spriteRenderer.sprite = runningSprite;
+            }
         }
         else
         {
-            _spriteRenderer.sprite = runningSprite;
+            _spriteRenderer.sprite = floatingInSpaceSprite;
         }
 
         if (_inputMoveDirection.x < 0)
