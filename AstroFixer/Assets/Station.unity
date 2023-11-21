@@ -17572,7 +17572,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 9
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -17604,7 +17604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1851578105}
   smoothSpeed: 3
-  offset: {x: 0, y: 8, z: -8}
+  offset: {x: 0, y: 60, z: -60}
 --- !u!4 &1099060310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 473198, guid: c70dd99c5cd1cbf4c9b8f226c3284b85, type: 3}
