@@ -18,7 +18,8 @@ public class ObjectiveIndicator : MonoBehaviour
     [SerializeField] public Image edgeIndicatorPrefab;
     [SerializeField] public Image iconOverlayPrefab;
     [SerializeField] public Canvas uiCanvas;
-    
+    [SerializeField] public GameObject parentOfObjectives;
+
     public List<ObjectiveData> objectiveList = new List<ObjectiveData>();
 
     private Camera mainCamera;
@@ -54,9 +55,9 @@ public class ObjectiveIndicator : MonoBehaviour
 
     public void AddObjective(Objective newObjective)
     {
-        Image onScreenIndicatorInstance = Instantiate(onScreenIndicatorPrefab, uiCanvas.transform);
-        Image edgeIndicatorInstance = Instantiate(edgeIndicatorPrefab, uiCanvas.transform);
-        Image iconOverlayInstance = Instantiate(iconOverlayPrefab, uiCanvas.transform);
+        Image onScreenIndicatorInstance = Instantiate(onScreenIndicatorPrefab, parentOfObjectives.transform);
+        Image edgeIndicatorInstance = Instantiate(edgeIndicatorPrefab, parentOfObjectives.transform);
+        Image iconOverlayInstance = Instantiate(iconOverlayPrefab, parentOfObjectives.transform);
 
         onScreenIndicatorInstance.enabled = false;
         edgeIndicatorInstance.enabled = false;
