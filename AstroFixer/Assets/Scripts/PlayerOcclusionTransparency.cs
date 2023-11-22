@@ -34,7 +34,6 @@ public class PlayerOcclusionTransparency : MonoBehaviour
         ResetOccludersHitMemory();
         if (IsPlayerOccluded(out List<Renderer> hitRenderers))
         {
-            Debug.Log(hitRenderers.Count);
             for(int i = 0; i < hitRenderers.Count; i++){
                 UpdateOccludingObject(hitRenderers[i]);
             }

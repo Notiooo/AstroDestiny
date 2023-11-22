@@ -27,11 +27,11 @@ public class ObjectiveIndicator : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        Objective[] initialObjectives = FindObjectsOfType<Objective>();
-        foreach (Objective obj in initialObjectives)
-        {
-            AddObjective(obj);
-        }
+        // Objective[] initialObjectives = FindObjectsOfType<Objective>();
+        // foreach (Objective obj in initialObjectives)
+        // {
+        //     AddObjective(obj);
+        // }
     }
 
     private void Update()
@@ -50,7 +50,7 @@ public class ObjectiveIndicator : MonoBehaviour
             }
             displayIconOnTheIndicator(objectiveData, screenPosition);
         }
-        removeIndicatorsWhichAreClose();
+        //removeIndicatorsWhichAreClose();
     }
 
     public void AddObjective(Objective newObjective)
@@ -92,25 +92,25 @@ public class ObjectiveIndicator : MonoBehaviour
         }
     }
 
-    private void removeIndicatorsWhichAreClose()
-    {
-        List<Objective> objectivesToRemove = new List<Objective>();
-        foreach (ObjectiveData objectiveData in objectiveList)
-        {
-            Vector3 playerPos = player.transform.position;
-            Vector3 objectivePos = objectiveData.objective.transform.position;
+    // private void removeIndicatorsWhichAreClose()
+    // {
+    //     List<Objective> objectivesToRemove = new List<Objective>();
+    //     foreach (ObjectiveData objectiveData in objectiveList)
+    //     {
+    //         Vector3 playerPos = player.transform.position;
+    //         Vector3 objectivePos = objectiveData.objective.transform.position;
 
-            float distance = Vector3.Distance(playerPos, objectivePos);
-            if (distance < 1.0f)
-            {
-                objectivesToRemove.Add(objectiveData.objective);
-            }
-        }
-        foreach (Objective objective in objectivesToRemove)
-        {
-            RemoveObjective(objective);
-        }
-    }
+    //         float distance = Vector3.Distance(playerPos, objectivePos);
+    //         if (distance < 1.0f)
+    //         {
+    //             objectivesToRemove.Add(objectiveData.objective);
+    //         }
+    //     }
+    //     foreach (Objective objective in objectivesToRemove)
+    //     {
+    //         RemoveObjective(objective);
+    //     }
+    // }
 
     private void displayOnlyScreenIndicator(ObjectiveData data, Vector3 screenPosition)
     {
