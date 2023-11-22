@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.044425197, g: 0.039700072, b: 0.047108755, a: 1}
+  m_IndirectSpecularColor: {r: 0.045267433, g: 0.039763328, b: 0.04798282, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015cdcb81046e58499ac48bc42b8425b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveIcon: {fileID: 21300000, guid: 451f1255374d22144b37fc16f474396f, type: 3}
+  objectiveIcon: {fileID: 21300000, guid: 7df9a6a3aa4cebb47b2e20024af12d80, type: 3}
 --- !u!1001 &80120804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7425,7 +7425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015cdcb81046e58499ac48bc42b8425b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveIcon: {fileID: 21300000, guid: 451f1255374d22144b37fc16f474396f, type: 3}
+  objectiveIcon: {fileID: 21300000, guid: 7df9a6a3aa4cebb47b2e20024af12d80, type: 3}
 --- !u!4 &444245921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 480488, guid: b3f6e169466f65a4aa48e83805d9e440, type: 3}
@@ -11681,7 +11681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015cdcb81046e58499ac48bc42b8425b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveIcon: {fileID: 21300000, guid: 451f1255374d22144b37fc16f474396f, type: 3}
+  objectiveIcon: {fileID: 21300000, guid: 74885af6f3d9bef46b2db41fde4fc237, type: 3}
 --- !u!4 &652720824
 Transform:
   m_ObjectHideFlags: 0
@@ -16196,7 +16196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015cdcb81046e58499ac48bc42b8425b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveIcon: {fileID: 21300000, guid: 451f1255374d22144b37fc16f474396f, type: 3}
+  objectiveIcon: {fileID: 21300000, guid: 755c61aa7158e8048a3b4e01e5b2a02a, type: 3}
 --- !u!1001 &923789967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25525,7 +25525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015cdcb81046e58499ac48bc42b8425b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveIcon: {fileID: 21300000, guid: 451f1255374d22144b37fc16f474396f, type: 3}
+  objectiveIcon: {fileID: 21300000, guid: 755c61aa7158e8048a3b4e01e5b2a02a, type: 3}
 --- !u!4 &1421145868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 473198, guid: c70dd99c5cd1cbf4c9b8f226c3284b85, type: 3}
@@ -29066,7 +29066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015cdcb81046e58499ac48bc42b8425b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveIcon: {fileID: 21300000, guid: 451f1255374d22144b37fc16f474396f, type: 3}
+  objectiveIcon: {fileID: 21300000, guid: b820cd8d5eabd1b4b9b77e137d0ed9e5, type: 3}
 --- !u!4 &1577336136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 473198, guid: c70dd99c5cd1cbf4c9b8f226c3284b85, type: 3}
