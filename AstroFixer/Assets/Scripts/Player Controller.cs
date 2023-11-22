@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 _velocity;
     private Vector3 _acceleration;
     private Vector3 _momentum;
-    private bool _isInside = true;
 
     [SerializeField] private float movementSpeedGround = 8;
     [SerializeField] private float movementForceSpace = 5;
@@ -47,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private void updatePlayerSprites()
     {
-        if (_isInside)
+        if (ZoneTracker.Instance.IsInZone())
         {
             if (_input.sqrMagnitude == 0)
             {
@@ -78,7 +77,7 @@ public class PlayerController : MonoBehaviour
         // Calculate velocity from player input
         Vector3 inputMovementVelocity = Vector3.zero;
 
-        if (_isInside) {
+        if (ZoneTracker.Instance.IsInZone()) {
             _acceleration = Vector3.zero;
             inputMovementVelocity = _inputMoveDirection * movementSpeedGround;
             _momentum = inputMovementVelocity / Time.deltaTime;
@@ -95,19 +94,5 @@ public class PlayerController : MonoBehaviour
     {
         _input = context.ReadValue<Vector2>();
         _inputMoveDirection = new Vector3(_input.x, 0, _input.y);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "InsideZone") {
-            _isInside = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "InsideZone") {
-            _isInside = false;
-        }
     }
 }

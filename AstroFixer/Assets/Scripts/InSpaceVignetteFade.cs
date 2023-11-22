@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 
-public class InSpaceVignetteFade : MonoBehaviour
+public class InSpaceVignetteFade : MonoBehaviour, IZoneListener
 {
     public PostProcessVolume volume;
     private Vignette vignette;
@@ -13,26 +13,26 @@ public class InSpaceVignetteFade : MonoBehaviour
 
     private void Start()
     {
+        ZoneTracker.Instance.RegisterListener(this);
         volume.profile.TryGetSettings(out vignette);
         volume.profile.TryGetSettings(out grain);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnDestroy()
     {
-        if (other.CompareTag("InsideZone")) 
-        {
-            StopAllCoroutines();
-            StartCoroutine(Fade(0f));
-        }
+        ZoneTracker.Instance.UnregisterListener(this);
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnZoneEnter()
     {
-        if (other.CompareTag("InsideZone"))
-        {
-            StopAllCoroutines();
-            StartCoroutine(Fade(1f));
-        }
+        StopAllCoroutines();
+        StartCoroutine(Fade(0f));
+    }
+
+    public void OnZoneExit()
+    {
+        StopAllCoroutines();
+        StartCoroutine(Fade(1f));
     }
 
     private IEnumerator Fade(float targetIntensity)
