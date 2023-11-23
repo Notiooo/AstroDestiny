@@ -93,8 +93,9 @@ public class ObjectivesController : MonoBehaviour
             float distance = Vector3.Distance(playerPos, objectivePos);
             if (distance < 2.0f)
             {
-                Debug.Log("System fixed! :D");
+                //Debug.Log("System fixed! :D");
                 RemoveObjectiveEvent(activeEvents[i]);
+                GameplayManager.Instance.pushState(GameplayState.MINIGAME);
             }
         }
     }
