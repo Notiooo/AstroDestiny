@@ -76,10 +76,12 @@ public class GameOverScript : MonoBehaviour
             yield return null;
         }
         fadeOutBlackImage.gameObject.SetActive(false);
+        Time.timeScale = 0;
     }
 
     public void RestartGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

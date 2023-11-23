@@ -68,7 +68,7 @@ public class ObjectivesController : MonoBehaviour
     {
         yield return new WaitForSeconds(objectiveEvent.timeout);
         if(objectiveEvent.active) {
-            Debug.Log("GAME OVER FOOL");
+            GameOverScript.Instance.TriggerGameOver("Your ship has been irreparably damaged. You face a lonely death on this ship. \n\n Gotta go fast next time.");
             RemoveObjectiveEvent(objectiveEvent);
         }
     }
