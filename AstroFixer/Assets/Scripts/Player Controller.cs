@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _acceleration;
     private Vector3 _momentum;
 
-    [SerializeField] private float movementSpeedGround = 8;
+    [SerializeField] public float movementSpeedGround = 8;
     [SerializeField] private float movementForceSpace = 5;
 
     [SerializeField] private Sprite runningSprite;
