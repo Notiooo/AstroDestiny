@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float _currentRotationVelocity;
     protected const float rotationSmoothTime = 0.1f;
 
+    bool sprinting = false;
+
     private Vector3 _velocity;
     private Vector3 _acceleration;
     private Vector3 _momentum;
@@ -94,5 +96,28 @@ public class PlayerController : MonoBehaviour
     {
         _input = context.ReadValue<Vector2>();
         _inputMoveDirection = new Vector3(_input.x, 0, _input.y);
+    }
+
+    private void ToggleSprint()
+    {
+        sprinting = !sprinting;
+        if(sprinting)
+        {
+            movementSpeedGround += 5;
+            movementForceSpace += 4;
+        }
+        else
+        {
+            movementSpeedGround -= 5;
+            movementForceSpace -= 4;
+        }
+    }
+
+    public void Sprint(InputAction.CallbackContext context)
+    {
+        if(context.started || context.canceled)
+        {
+            ToggleSprint();
+        }
     }
 }
