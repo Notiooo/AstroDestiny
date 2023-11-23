@@ -51,7 +51,7 @@ public class CameraShake : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(3f, 30f));
+            yield return new WaitForSeconds(Random.Range(3f, 15f));
             if (isInInsideZone)
             {
                 StartCoroutine(Shake(shakeDuration, shakeMagnitude));

@@ -67,7 +67,7 @@ public class MashMinigameController : MonoBehaviour
 
     void AnimateWrech() {
         wrench.transform.Rotate(0, 0, Mathf.LerpAngle(animStart, animEnd, animAngle));
-        animAngle += 0.005f;
+        animAngle += 0.2f * Time.deltaTime;
         if(animAngle >= 0.2) {
             animationDone = true;
         }

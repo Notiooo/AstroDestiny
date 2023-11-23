@@ -38,7 +38,7 @@ public class ToolInteraction : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, pickupRadius);
         float minDistance = float.MaxValue;
-        Collider closestTool = null;
+        GameObject closestTool = null;
 
         foreach (var collider in colliders)
         {
@@ -47,7 +47,7 @@ public class ToolInteraction : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
                 if (distance < minDistance)
                 {
-                    closestTool = collider;
+                    closestTool = collider.gameObject;
                     minDistance = distance;
                 }
             }
@@ -63,6 +63,7 @@ public class ToolInteraction : MonoBehaviour
 
     void AttachTool(GameObject tool)
     {
+        tool.GetComponent<Collider>().enabled = false;
         tool.transform.SetParent(toolHolder);
         tool.transform.localPosition = Vector3.zero;
     }
@@ -72,6 +73,7 @@ public class ToolInteraction : MonoBehaviour
         if (currentTool != null)
         {
             currentTool.transform.SetParent(toolsParent.transform);
+            currentTool.GetComponent<Collider>().enabled = true;
             currentTool.transform.position = transform.position;
             currentTool = null;
             playerController.movementSpeedGround = normalSpeed;
