@@ -3,21 +3,12 @@ using UnityEngine;
 public class ToolInteraction : MonoBehaviour
 {
     public PlayerController playerController;
-    public float normalSpeed;
-    public float speedWithTool;
+    public float speedDebuffWithTool;
     public Transform toolHolder;
     public GameObject toolsParent;
     public float pickupRadius = 1f;
 
     private GameObject currentTool = null;
-
-    private void Start()
-    {
-        if (playerController != null)
-        {
-            normalSpeed = playerController.movementSpeedGround;
-        }
-    }
 
     private void Update()
     {
@@ -57,7 +48,7 @@ public class ToolInteraction : MonoBehaviour
         {
             currentTool = closestTool.gameObject;
             AttachTool(currentTool);
-            playerController.movementSpeedGround = speedWithTool;
+            playerController.movementSpeedGround -= speedDebuffWithTool;
         }
     }
 
@@ -76,7 +67,7 @@ public class ToolInteraction : MonoBehaviour
             currentTool.GetComponent<Collider>().enabled = true;
             currentTool.transform.position = transform.position;
             currentTool = null;
-            playerController.movementSpeedGround = normalSpeed;
+            playerController.movementSpeedGround += speedDebuffWithTool;
         }
     }
 }

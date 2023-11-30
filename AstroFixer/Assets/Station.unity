@@ -39146,8 +39146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 1851578102}
-  normalSpeed: 8
-  speedWithTool: 3
+  speedDebuffWithTool: 5
   toolHolder: {fileID: 672867736}
   toolsParent: {fileID: 1814605075}
   pickupRadius: 1
