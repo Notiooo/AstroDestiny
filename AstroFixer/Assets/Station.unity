@@ -19122,7 +19122,7 @@ GameObject:
   - component: {fileID: 1044534386}
   - component: {fileID: 1044534385}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Asteroid Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19353,13 +19353,22 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 40
-      minScalar: 25
+      scalar: 30
+      minScalar: 15
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
+          value: 0.33333397
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5397339
           value: 1
           inSlope: 0
           outSlope: 0
@@ -19471,7 +19480,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6.41
+      scalar: 2.5
       minScalar: 4.3
       maxCurve:
         serializedVersion: 2
@@ -20433,7 +20442,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1.2217305
-      minScalar: 0.34906584
+      minScalar: -1.2217305
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -20552,14 +20561,14 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
       serializedVersion: 2
-      minMaxState: 1
-      scalar: 0.9999
+      minMaxState: 0
+      scalar: 0
       minScalar: 0.9999
       maxCurve:
         serializedVersion: 2
@@ -20611,8 +20620,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startFrame:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 0.9999
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -20667,11 +20676,14 @@ ParticleSystem:
     tilesY: 1
     animationType: 0
     rowIndex: 0
-    cycles: 1
+    cycles: 0.0001
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: bff205121aba51a45aed9bcf8f0b7e82, type: 3}
+    - sprite: {fileID: 21300000, guid: ec7ff85bd68cdc243876b7e7d63b115d, type: 3}
+    - sprite: {fileID: 21300000, guid: 75282d44c2e7ff24fab28955d2045926, type: 3}
+    - sprite: {fileID: 21300000, guid: 4adac50364c858d44b059f08a4215c59, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -22421,15 +22433,15 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 0
-          outSlope: 0
+          inSlope: 0.101864904
+          outSlope: 0.101864904
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.4635761
         - serializedVersion: 3
           time: 1
-          value: 0.16216289
+          value: 0.37882954
           inSlope: -0.33390036
           outSlope: -0.33390036
           tangentMode: 0
@@ -40892,7 +40904,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 66270d91c4978194cbef487cb2910f1f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
