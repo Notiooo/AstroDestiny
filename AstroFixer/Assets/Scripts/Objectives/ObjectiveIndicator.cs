@@ -184,4 +184,20 @@ public class ObjectiveIndicator : MonoBehaviour
             0
         );
     }
+
+    public void SetRedOverlay(Objective objective, bool overlaySet) {
+        ObjectiveData objectiveData = objectiveList.Find(data => data.objective == objective);
+
+        if (objectiveData.objective != null)
+        {
+            if(overlaySet)
+            {
+                objectiveData.iconOverlay.GetComponent<Image>().color = new Color(1f, 0f, 0f);
+            }
+            else
+            {
+                objectiveData.iconOverlay.GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            }
+        }
+    }
 }

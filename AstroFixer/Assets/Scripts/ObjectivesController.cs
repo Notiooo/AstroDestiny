@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,11 +23,15 @@ public class ObjectivesController : MonoBehaviour
         public Objective objective;
         public float timeout = 20;
         public bool active = false;
+        public float blinkFrequency = 0.75f;
+        public bool isBlinked = false;
         public ObjectiveType type = ObjectiveType.OBJECTIVE_TIGHTEN;
     }
     private List<ObjectiveEvent> events = new List<ObjectiveEvent>();
     private List<ObjectiveEvent> activeEvents = new List<ObjectiveEvent>();
     private List<ObjectiveEvent> dormantEvents = new List<ObjectiveEvent>();
+
+    private float frequency;
 
     // Start is called before the first frame update
     void Start()
@@ -64,9 +69,34 @@ public class ObjectivesController : MonoBehaviour
         }
     }
 
+    public IEnumerator Blinker(ObjectiveEvent objectiveEvent)
+    {
+        while(objectiveEvent.active) {
+            yield return new WaitForSeconds(1/objectiveEvent.blinkFrequency);
+            objectiveEvent.isBlinked = !objectiveEvent.isBlinked;
+
+            objectiveIndicator.SetRedOverlay(objectiveEvent.objective, objectiveEvent.isBlinked);
+        }
+    }
+
     public IEnumerator RunEvent(ObjectiveEvent objectiveEvent)
     {
-        yield return new WaitForSeconds(objectiveEvent.timeout);
+        //yield return new WaitForSeconds(objectiveEvent.timeout);
+
+        float elapsed = 0.0f;
+        StartCoroutine(Blinker(objectiveEvent));
+
+        while (elapsed < objectiveEvent.timeout)
+        {
+            float t = elapsed / objectiveEvent.timeout;
+            t = t * t * t * t * (3f - 2f * t);
+
+            objectiveEvent.blinkFrequency = Mathf.Lerp(0.75f, 20f, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
         if(objectiveEvent.active) {
             GameOverScript.Instance.TriggerGameOver("Your ship has been irreparably damaged. You face a lonely death on this ship. \n\n Gotta go fast next time.");
             RemoveObjectiveEvent(objectiveEvent);
