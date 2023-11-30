@@ -19137,7 +19137,7 @@ Transform:
   m_GameObject: {fileID: 1044534383}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9632986, z: -0, w: 0.26843226}
-  m_LocalPosition: {x: 14.1, y: 14.5, z: 122.9}
+  m_LocalPosition: {x: 14.1, y: 13.58, z: 122.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19184,7 +19184,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -19300,7 +19300,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10.01
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -19797,7 +19797,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 1711
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -19865,7 +19865,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 181.64, y: 9.8, z: 1}
+    m_Scale: {x: 181.64, y: 14.45, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
