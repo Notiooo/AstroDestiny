@@ -53,7 +53,7 @@ public class InSpaceVignetteFade : MonoBehaviour, IZoneListener
 
         if (targetIntensity == 1f)
         {
-            GameOverScript.Instance.TriggerGameOver("You are lost in a black abyss.\n\n A slow and unpleasant death from lack of oxygen awaits you.");
+            GameplayManager.Instance.EndGame("You are lost in a black abyss.\n\n A slow and unpleasant death from lack of oxygen awaits you.");
         }
     }
 }

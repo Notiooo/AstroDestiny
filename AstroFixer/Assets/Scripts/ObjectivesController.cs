@@ -81,8 +81,6 @@ public class ObjectivesController : MonoBehaviour
 
     public IEnumerator RunEvent(ObjectiveEvent objectiveEvent)
     {
-        //yield return new WaitForSeconds(objectiveEvent.timeout);
-
         float elapsed = 0.0f;
         StartCoroutine(Blinker(objectiveEvent));
 
@@ -98,8 +96,7 @@ public class ObjectivesController : MonoBehaviour
         }
 
         if(objectiveEvent.active) {
-            GameOverScript.Instance.TriggerGameOver("Your ship has been irreparably damaged. You face a lonely death on this ship. \n\n Gotta go fast next time.");
-            RemoveObjectiveEvent(objectiveEvent);
+            GameOver();
         }
     }
 
@@ -123,7 +120,6 @@ public class ObjectivesController : MonoBehaviour
             float distance = Vector3.Distance(playerPos, objectivePos);
             if (distance < 2.0f)
             {
-                //Debug.Log("System fixed! :D");
                 RemoveObjectiveEvent(activeEvents[i]);
                 GameplayManager.Instance.pushState(GameplayState.MINIGAME);
             }
@@ -141,5 +137,11 @@ public class ObjectivesController : MonoBehaviour
         dormantEvents.Add(objectiveEvent);
         activeEvents.Remove(objectiveEvent);
         objectiveIndicator.RemoveObjective(objectiveEvent.objective);
+    }
+
+    private void GameOver()
+    {
+        StopAllCoroutines();
+        GameplayManager.Instance.EndGame("Your ship has been irreparably damaged. You face a lonely death on this ship. \n\n Gotta go fast next time.");
     }
 }

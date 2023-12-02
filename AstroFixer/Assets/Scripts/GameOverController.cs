@@ -2,35 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameplayState {
-    MAIN,
-    MINIGAME
-}
-public class GameplayManager : StateManager<GameplayState>
+public class GameOverController : MonoBehaviour
 {
     [SerializeField] GameState thisState;
     [SerializeField] GameState nextState;
 
-    public static GameplayManager Instance { get; private set; }
-
     void Awake() {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-
         GameManager.Instance.onStateChange += OnGameManagerStateChanged;
         this.gameObject.SetActive(false);
-    }
-
-    public void EndGame(string endScreenMessage)
-    {
-        GameOverScript.Instance.SetGameOverText(endScreenMessage);
-        GameManager.Instance.pushState(nextState);
     }
 
     void OnDestroy() {
@@ -41,8 +20,15 @@ public class GameplayManager : StateManager<GameplayState>
         if(topState == thisState) {
             Debug.Log(thisState + " detected.");
             this.gameObject.SetActive(true);
-            Instance.pushState(GameplayState.MAIN);
+            InputAccess.playerInput.SwitchCurrentActionMap("EndMenu");
+            GameOverScript.Instance.TriggerGameOver();
         }
+    }
+
+    public void OnRestartGameClicked() {
+        this.gameObject.SetActive(false);
+        GameManager.Instance.popState();
+        GameOverScript.Instance.RestartGame();
     }
 
     // Start is called before the first frame update
@@ -54,6 +40,6 @@ public class GameplayManager : StateManager<GameplayState>
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

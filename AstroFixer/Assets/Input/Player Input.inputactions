@@ -168,6 +168,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "EndMenu",
+            "id": "e3ad1a83-62ca-44e7-a6d4-9a3eacf6447d",
+            "actions": [
+                {
+                    "name": "Restart",
+                    "type": "Value",
+                    "id": "3d669c1b-5a44-44a3-bb7a-5ad4d3b49193",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "082bb5ce-2273-4846-ad2f-9f1fc6579712",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

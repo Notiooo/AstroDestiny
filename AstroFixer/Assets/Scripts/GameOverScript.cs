@@ -17,6 +17,7 @@ public class GameOverScript : MonoBehaviour
     void Awake()
     {
         InitializeSingleton();
+        DisableUIElements();
     }
 
     private void InitializeSingleton()
@@ -41,12 +42,17 @@ public class GameOverScript : MonoBehaviour
 
     void Start()
     {
-        DisableUIElements();
+        fadeInBlackImage.color = new Color(0, 0, 0, 0);
+        fadeOutBlackImage.color = new Color(0, 0, 0, 1);
     }
 
-    public void TriggerGameOver(string message)
+    public void SetGameOverText(string message)
     {
         gameOverText.text = message;
+    }
+
+    public void TriggerGameOver()
+    {
         StartCoroutine(FadeToBlack());
     }
 
