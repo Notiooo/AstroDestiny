@@ -56,7 +56,7 @@ public class ObjectivesController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minEventSpawnInterval, maxEventSpawnInterval));
-            if (activeEvents.Count <= maxActiveEvents && dormantEvents.Count != 0)
+            if (activeEvents.Count < maxActiveEvents && dormantEvents.Count != 0)
             {
                 int activateEvent = Random.Range(0, dormantEvents.Count);
                 activeEvents.Add(dormantEvents[activateEvent]);
