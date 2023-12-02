@@ -119,11 +119,11 @@
             "actions": [
                 {
                     "name": "Start",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "8cd89138-1a47-4fdd-8e51-6b2dfd1112d8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "initialStateCheck": true
                 }
             ],
@@ -175,11 +175,11 @@
             "actions": [
                 {
                     "name": "Restart",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "3d669c1b-5a44-44a3-bb7a-5ad4d3b49193",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "initialStateCheck": true
                 }
             ],

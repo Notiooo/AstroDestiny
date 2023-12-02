@@ -13,6 +13,8 @@ public class ObjectivesController : MonoBehaviour
     [SerializeField] public float maxEventSpawnInterval;
     [SerializeField] public ObjectiveIndicator objectiveIndicator;
     [SerializeField] public GameObject player;
+    [SerializeField] public int maxActiveEvents;
+    [SerializeField] public int maxFailedEvents;
     public enum ObjectiveType {
         OBJECTIVE_TIGHTEN
     }
@@ -31,7 +33,7 @@ public class ObjectivesController : MonoBehaviour
     private List<ObjectiveEvent> activeEvents = new List<ObjectiveEvent>();
     private List<ObjectiveEvent> dormantEvents = new List<ObjectiveEvent>();
 
-    private float frequency;
+    private int failedEvents = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +56,7 @@ public class ObjectivesController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minEventSpawnInterval, maxEventSpawnInterval));
-            if (activeEvents.Count < dormantEvents.Count)
+            if (activeEvents.Count <= maxActiveEvents && dormantEvents.Count != 0)
             {
                 int activateEvent = Random.Range(0, dormantEvents.Count);
                 activeEvents.Add(dormantEvents[activateEvent]);
@@ -96,7 +98,15 @@ public class ObjectivesController : MonoBehaviour
         }
 
         if(objectiveEvent.active) {
-            GameOver();
+            objectiveEvent.objective.EnableEmmiter();
+            DeleteObjective(objectiveEvent);
+            
+            failedEvents ++;
+
+            if(failedEvents >= maxFailedEvents)
+            {
+                GameOver();
+            }
         }
     }
 
@@ -120,7 +130,7 @@ public class ObjectivesController : MonoBehaviour
             float distance = Vector3.Distance(playerPos, objectivePos);
             if (distance < 2.0f)
             {
-                RemoveObjectiveEvent(activeEvents[i]);
+                DeactivateObjectiveEvent(activeEvents[i]);
                 GameplayManager.Instance.pushState(GameplayState.MINIGAME);
             }
         }
@@ -131,7 +141,13 @@ public class ObjectivesController : MonoBehaviour
         CheckObjectivesInteraction();
     }
 
-    private void RemoveObjectiveEvent(ObjectiveEvent objectiveEvent)
+    public void DeleteObjective(ObjectiveEvent objectiveEvent)
+    {
+        DeactivateObjectiveEvent(objectiveEvent);
+        dormantEvents.Remove(objectiveEvent);
+    }
+
+    private void DeactivateObjectiveEvent(ObjectiveEvent objectiveEvent)
     {
         objectiveEvent.active = false;
         dormantEvents.Add(objectiveEvent);
