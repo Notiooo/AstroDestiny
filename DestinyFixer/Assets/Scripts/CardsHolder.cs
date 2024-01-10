@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
+
 public class CardsHolder : MonoBehaviour
 {
+    public static CardsHolder Instance { get ; private set; }
+
     private const float CardsDepth = 10.0f;
     private const float TimeScale = 0.98f;
 
@@ -28,6 +32,10 @@ public class CardsHolder : MonoBehaviour
 
     private int selectedCardIndex = -1;
 
+    public bool OpenDoorCardInHand => cardsInHand[0] != null;
+    public bool RepairCardInHand => cardsInHand[1] != null;
+    public bool SpeedCardInHand => cardsInHand[2] != null;
+
     private void AddCard(GameObject cardPrefab, int slotIndex)
     {
         if (slotIndex < 0 || slotIndex > cardsInHand.Length)
@@ -45,19 +53,25 @@ public class CardsHolder : MonoBehaviour
         cardsInHand[slotIndex] = card;
     }
 
-    private void AddOpenDoorsCard()
+    public void AddOpenDoorsCard()
     {
         if (cardsInHand[0] == null)
             AddCard(openDoorsPrefab, 0);
     }
 
-    private void AddRepairCard()
+    public void DiscardOpenDoorsCard()
+    {
+        cardsTrash.AddLast(cardsInHand[0]);
+        cardsInHand[0] = null;
+    }
+
+    public void AddRepairCard()
     {
         if (cardsInHand[1] == null)
             AddCard(repairPrefab, 1);
     }
 
-    private void AddSpeedCard()
+    public void AddSpeedCard()
     {
         if (cardsInHand[2] == null)
             AddCard(speedPrefab, 2);
@@ -65,6 +79,8 @@ public class CardsHolder : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         if (!transform.parent.TryGetComponent(out mainCamera))
         {
             Debug.LogError("Could not find main camera in the parent node");
@@ -73,10 +89,6 @@ public class CardsHolder : MonoBehaviour
 
         leftBottom = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, 0.0f, CardsDepth));
         leftBottom = mainCamera.transform.InverseTransformPoint(leftBottom);
-
-        AddOpenDoorsCard();
-        AddRepairCard();
-        AddSpeedCard();
     }
 
     private void Update()
