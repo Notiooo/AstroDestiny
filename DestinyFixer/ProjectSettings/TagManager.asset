@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InsideZone
   - Tool
+  - Enemy
   layers:
   - Default
   - TransparentFX
