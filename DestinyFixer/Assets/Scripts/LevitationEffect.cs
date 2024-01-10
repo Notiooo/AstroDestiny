@@ -7,13 +7,13 @@ public class LevitationEffect : MonoBehaviour
     public Transform shadowTransform;
 
     private Vector3 shadowStartScale;
-    private Vector3 startPosition;
+    private float levitationOffset = 0f;
+    private float lastLevitationOffset = 0f;
     private float shadowMinScale = 0.5f;
     private SpriteRenderer shadowRenderer;
 
     void Start()
     {
-        startPosition = transform.position;
         if (shadowTransform != null)
         {
             shadowStartScale = shadowTransform.localScale;
@@ -23,11 +23,16 @@ public class LevitationEffect : MonoBehaviour
 
     void Update()
     {
-        float levitation = Mathf.Sin(Time.time * Mathf.PI * frequency) * amplitude;
-        transform.position = new Vector3(startPosition.x, startPosition.y + levitation, startPosition.z);
+        lastLevitationOffset = levitationOffset;
+        levitationOffset = Mathf.Sin(Time.time * Mathf.PI * frequency) * amplitude;
+
+        // Apply levitation offset
+        Vector3 levitationDelta = new Vector3(0f, levitationOffset - lastLevitationOffset, 0f);
+        transform.position += levitationDelta;
+
         if (shadowTransform != null)
         {
-            float scale = 1 - (levitation / amplitude) * (1 - shadowMinScale);
+            float scale = 1 - (levitationOffset / amplitude) * (1 - shadowMinScale);
             scale = Mathf.Clamp(scale, shadowMinScale, 1f);
             shadowTransform.localScale = new Vector3(shadowStartScale.x * scale, shadowStartScale.y, shadowStartScale.z * scale);
 
