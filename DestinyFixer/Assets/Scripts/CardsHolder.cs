@@ -6,12 +6,16 @@ using UnityEngine;
 public class CardsHolder : MonoBehaviour
 {
     private const float CardsDepth = 10.0f;
+    private const float TimeScale = 0.98f;
 
     private readonly GameObject[] cardsInHand = new GameObject[3];
+    private readonly LinkedList<GameObject> cardsTrash = new LinkedList<GameObject>();
 
     private Camera mainCamera;
     private Vector3 leftBottom;
 
+    [SerializeField]
+    private PlayerController playerController;
 
     [SerializeField]
     private GameObject openDoorsPrefab;
@@ -43,17 +47,20 @@ public class CardsHolder : MonoBehaviour
 
     private void AddOpenDoorsCard()
     {
-        AddCard(openDoorsPrefab, 0);
+        if (cardsInHand[0] == null)
+            AddCard(openDoorsPrefab, 0);
     }
 
     private void AddRepairCard()
     {
-        AddCard(repairPrefab, 1);
+        if (cardsInHand[1] == null)
+            AddCard(repairPrefab, 1);
     }
 
     private void AddSpeedCard()
     {
-        AddCard(speedPrefab, 2);
+        if (cardsInHand[2] == null)
+            AddCard(speedPrefab, 2);
     }
 
     private void Awake()
@@ -74,19 +81,63 @@ public class CardsHolder : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            AddSpeedCard();
+        }
+
         selectedCardIndex = -1;
         Vector3 mousePos = Input.mousePosition;
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100.0f))
         {
-            var flyingCard = hitInfo.transform.GetComponent<FlyingCard>();
-            if (flyingCard != null)
+            if (hitInfo.transform.TryGetComponent<FlyingCard>(out var flyingCard))
             {
                 selectedCardIndex = flyingCard.HandIndex;
             }
         }
 
+        if (Input.GetMouseButtonDown(0) && selectedCardIndex == 2)
+        {
+            cardsTrash.AddLast(cardsInHand[2]);
+            cardsInHand[2] = null;
+
+            playerController.StartSprinting();
+            StartCoroutine(StopSprint());
+        }
+
         UpdateCardTransforms();
+        UpdateCardsTrash();
+    }
+
+    private IEnumerator StopSprint()
+    {
+        yield return new WaitForSeconds(5);
+        playerController.StopSprinting();
+    }
+
+    private void UpdateCardsTrash()
+    {
+        var toDestroy = new List<GameObject>();
+        foreach (var card in cardsTrash)
+        {
+            var sr = card.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a * 0.97f);
+                card.transform.position += Time.deltaTime * 0.4f * Vector3.right;
+                if (sr.color.a < 0.1f)
+                {
+                    toDestroy.Add(card);
+                }
+            }
+        }
+
+        foreach (var card in toDestroy)
+        {
+            Destroy(card);
+            cardsTrash.Remove(card);
+        }
     }
 
     private void UpdateCardTransforms()
@@ -98,13 +149,12 @@ public class CardsHolder : MonoBehaviour
         for (int i = 0; i < cardsInHand.Length; i++)
         {
             GameObject cardGameObject = cardsInHand[i];
-            SpriteRenderer spriteRenderer = cardGameObject.GetComponent<SpriteRenderer>();
-
             if (cardGameObject == null)
             {
                 continue;
             }
 
+            SpriteRenderer spriteRenderer = cardGameObject.GetComponent<SpriteRenderer>();
             if (selectedCardIndex == i)
             {
                 float x = leftBottom.x + displacementX;
@@ -136,13 +186,13 @@ public class CardsHolder : MonoBehaviour
                 cardGameObject.transform.localPosition = Vector3.Slerp(
                     new Vector3(leftBottom.x + displacementX, leftBottom.y + displacementY, CardsDepth),
                     cardGameObject.transform.localPosition,
-                    0.99f
+                    TimeScale
                 );
                 spriteRenderer.sortingOrder = 31000 + i;
             }
             
 
-            float lerpedAngle = Mathf.LerpAngle(angle, cardGameObject.transform.localEulerAngles.z, 0.99f);
+            float lerpedAngle = Mathf.LerpAngle(angle, cardGameObject.transform.localEulerAngles.z, TimeScale);
             cardGameObject.transform.localEulerAngles = new Vector3(0, 0, lerpedAngle);
 
             angle -= 30.0f;

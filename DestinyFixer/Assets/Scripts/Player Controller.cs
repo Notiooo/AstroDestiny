@@ -113,6 +113,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StartSprinting()
+    {
+        sprinting = true;
+        movementSpeedGround += 5;
+        movementForceSpace += 4;
+    }
+
+    public void StopSprinting()
+    {
+        movementSpeedGround -= 5;
+        movementForceSpace -= 4;
+    }
+
     public void Sprint(InputAction.CallbackContext context)
     {
         if(context.started || context.canceled)
